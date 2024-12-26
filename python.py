@@ -28,6 +28,15 @@ def save_file():
         except Exception as e:
             messagebox.showerror("Error", f"Cannot save file: {e}")
 
+def save_as_file():
+    file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")])
+    if file_path:
+        try:
+            with open(file_path, "w") as file:
+                file.write(text_area.get(1.0, tk.END))
+            root.title(f"{file_path} - Notepad")
+        except Exception as e:
+            messagebox.showerror("Error", f"Cannot save file: {e}")
 def exit_app():
     if messagebox.askyesno("Exit", "Do you want to save changes before exiting?"):
         save_file()
